@@ -1,0 +1,801 @@
+/*
+  This file contains the custom CSS for the portfolio website.
+  It includes styles for the overall layout, typography, animations,
+  and specific components like the particle canvas and gradient text.
+*/
+
+html,
+body {
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    max-width: 100%;
+    /* Tailwind CSS classes are used for the background color in the HTML,
+       but you could set a fallback here if needed. */
+}
+
+/* This ensures that when you click a nav link, the top of the
+   section aligns just below the sticky navigation bar. */
+.section,
+section[id] {
+    scroll-margin-top: 96px; /* Matches the floating header height */
+}
+
+/* ---- Global polish ---- */
+
+/* Custom gradient scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #0e0720;
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(#a855f7, #8b5cf6);
+    border-radius: 10px;
+    border: 2px solid #0f172a;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(#9333ea, #7c3aed);
+}
+
+/* Nice text selection */
+::selection {
+    background: rgba(168, 85, 247, 0.3);
+    color: #fff;
+}
+
+/* Animated gradient underline under every section heading */
+section h2.gradient-text::after {
+    content: "";
+    display: block;
+    width: 70px;
+    height: 4px;
+    margin: 14px auto 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #a855f7, #8b5cf6);
+    animation: underlinePulse 2.5s ease-in-out infinite alternate;
+}
+@keyframes underlinePulse {
+    from { width: 50px; opacity: 0.7; }
+    to { width: 110px; opacity: 1; }
+}
+
+/* Frosted-glass navbar that intensifies on scroll */
+header nav {
+    transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+body.scrolled header nav {
+    box-shadow: 0 10px 40px rgba(168, 85, 247, 0.18);
+}
+
+/* Depth: soft colour glows layered over the dark background */
+body {
+    background-image:
+        radial-gradient(600px circle at 0% 0%, rgba(168, 85, 247, 0.06), transparent 45%),
+        radial-gradient(700px circle at 100% 20%, rgba(139, 92, 246, 0.06), transparent 45%),
+        radial-gradient(700px circle at 50% 100%, rgba(168, 85, 247, 0.05), transparent 45%);
+    background-attachment: fixed;
+}
+
+/* Glassmorphism: turn every dark card into frosted glass (skip form fields) */
+section .bg-slate-800:not(input):not(textarea) {
+    background-color: rgba(45, 27, 78, 0.5) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(148, 163, 184, 0.14);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+    transition: transform 0.4s cubic-bezier(.4, 2, .6, 1), border-color 0.4s, box-shadow 0.4s;
+}
+section .bg-slate-800:not(input):not(textarea):hover {
+    border-color: rgba(168, 85, 247, 0.45);
+    box-shadow: 0 0 40px rgba(168, 85, 247, 0.18), 0 10px 36px rgba(0, 0, 0, 0.35);
+}
+
+/* Keep form fields readable (solid), but glow on focus */
+#contact input,
+#contact textarea {
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+#contact input:focus,
+#contact textarea:focus {
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15), 0 0 24px rgba(168, 85, 247, 0.15);
+}
+
+/* Styles for the typing animation cursor in the hero section */
+.typing-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.5rem; /* Should match the line-height of the text it's next to */
+    background-color: #a855f7; /* Tailwind's cyan-400 */
+    animation: blink 0.7s infinite;
+}
+
+/* Blinking animation for the typing cursor */
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Styles for the particle animation canvas in the hero section */
+#particle-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Places the canvas behind the hero content */
+}
+
+/* This container holds the main hero content (text, image, etc.) */
+.hero-content {
+    position: relative;
+    z-index: 2; /* Ensures the content is on top of the particle canvas */
+}
+
+/* Utility class to create a gradient text effect */
+.gradient-text {
+    background: linear-gradient(to right, #d8b4fe, #9333ea); /* Tailwind's cyan-300 to cyan-500 */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+}
+
+/* Pulse animation for hero/profile image */
+.pulse {
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(168,85,247,0.7);}
+  50% { transform: scale(1.08); box-shadow: 0 0 40px 10px rgba(168,85,247,0.3);}
+}
+
+/* Floating animation for social icons */
+.float {
+  animation: float 2.5s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0);}
+  50% { transform: translateY(-10px);}
+}
+
+/* Card pop and glow on hover */
+.project-card, .achievement-card {
+  transition: transform 0.4s cubic-bezier(.4,2,.6,1), box-shadow 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+.project-card:hover, .achievement-card:hover {
+  transform: translateY(-12px) scale(1.04) rotate(-1deg);
+  box-shadow: 0 12px 40px 0 rgba(168,85,247,0.5), 0 2px 12px 0 rgba(0,0,0,0.2);
+}
+.project-card img, .achievement-card img {
+  transition: transform 0.5s cubic-bezier(.4,2,.6,1), filter 0.5s;
+}
+.project-card:hover img, .achievement-card:hover img {
+  transform: scale(1.06) rotate(-1deg);
+  filter: brightness(1.1) saturate(1.2);
+}
+
+/* About image hover effect */
+.about-img-hover {
+  transition: transform 0.4s cubic-bezier(.4,2,.6,1), box-shadow 0.4s;
+}
+.about-img-hover:hover {
+  transform: scale(1.07) rotate(-2deg);
+  box-shadow: 0 8px 32px 0 rgba(168,85,247,0.4), 0 1.5px 8px 0 rgba(0,0,0,0.2);
+}
+
+/* Button pop effect */
+.button-pop {
+  transition: transform 0.2s;
+}
+.button-pop:hover {
+  transform: scale(1.08) rotate(-2deg);
+  box-shadow: 0 4px 20px 0 rgba(168,85,247,0.3);
+}
+
+/* Animated underline for links */
+a.animated-underline {
+  position: relative;
+  overflow: hidden;
+}
+a.animated-underline::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(to right, #d8b4fe, #9333ea);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+}
+a.animated-underline:hover::after {
+  transform: scaleX(1);
+}
+
+/* Floating Navbar Effect */
+.floating-navbar {
+  box-shadow: 0 8px 32px 0 rgba(168,85,247,0.15), 0 1.5px 8px 0 rgba(0,0,0,0.12);
+  backdrop-filter: blur(8px);
+  transition: box-shadow 0.3s, background 0.3s, transform 0.3s;
+}
+
+/* Optional: Slight scale and shadow on scroll */
+body.scrolled .floating-navbar {
+  background: rgba(30,41,59,0.95); /* Stronger bg on scroll */
+  box-shadow: 0 12px 40px 0 rgba(168,85,247,0.18), 0 2px 12px 0 rgba(0,0,0,0.18);
+  transform: scale(1.01);
+}
+
+/* Animal horizontal scroll animation */
+.animal-scroll {
+  background: linear-gradient(90deg, #0e7490 0%, #155e75 100%);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px 0 rgba(168,85,247,0.12);
+  margin: 2rem 0;
+}
+.animate-animal-scroll {
+  animation: animal-scroll 18s linear infinite;
+}
+@keyframes animal-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animal-scroll img {
+  filter: drop-shadow(0 2px 8px #9333eaaa);
+  transition: transform 0.3s;
+}
+.animal-scroll img:hover {
+  transform: scale(1.2) rotate(-8deg);
+}
+
+/* Hamburger animation (for fallback if not using Tailwind's group-[.open]) */
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
+
+/* Animated gradient background for hero section */
+.hero-gradient-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.7;
+  background: linear-gradient(120deg, #9333ea 0%, #0ea5e9 50%, #1e293b 100%);
+  background-size: 200% 200%;
+  animation: hero-gradient-move 8s ease-in-out infinite;
+  filter: blur(32px) brightness(1.2) saturate(1.2);
+}
+@keyframes hero-gradient-move {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+/* Floating Animation for Profile */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+
+.floating-navbar {
+  position: fixed;
+  top: 15px;              /* upar se thoda kam */
+  left: 15px;             /* left margin kam */
+  right: 15px;            /* right margin kam */
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  padding: 12px 25px;
+  z-index: 1000;
+}
+
+
+
+
+
+/* Hackathon Memories Section */
+.memories-section {
+  padding: 80px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.memories-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+  position: relative;
+  display: inline-block;
+}
+
+.memories-title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: #c084fc;
+  margin: 10px auto 0;
+  border-radius: 2px;
+  animation: expand 2s infinite alternate;
+}
+
+@keyframes expand {
+  from { width: 50px; }
+  to { width: 120px; }
+}
+
+.memories-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.memory-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.memory-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.memory-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+.memory-card:hover img {
+  transform: scale(1.2);
+}
+
+/* ============================================================
+   RESPONSIVE OVERRIDES — make the site work on all devices
+   ============================================================ */
+
+/* Tablets and below */
+@media (max-width: 1024px) {
+  .gallery {
+    column-count: 2;
+  }
+}
+
+/* Phones */
+@media (max-width: 640px) {
+  .gallery {
+    column-count: 1;
+    column-gap: 0;
+  }
+  .gallery-item {
+    margin-bottom: 16px;
+  }
+
+  /* Memories heading scales down so it never overflows */
+  .memories {
+    padding: 56px 16px;
+  }
+  .memories h2 {
+    font-size: 2rem;
+  }
+
+  /* Smaller, edge-hugging lightbox controls on small screens */
+  .close,
+  .prev,
+  .next {
+    font-size: 1.8rem;
+  }
+  .close {
+    top: 12px;
+    right: 16px;
+  }
+  .prev {
+    left: 10px;
+  }
+  .next {
+    right: 10px;
+  }
+  .lightbox-img {
+    max-width: 94%;
+    max-height: 75%;
+  }
+}
+
+/* Prevent any stray element from forcing horizontal scroll */
+img,
+video {
+  max-width: 100%;
+}
+
+/* ============================================================
+   RESPONSIVE POLISH — tablet & mobile
+   ============================================================ */
+
+/* Tablet (<= 1024px) */
+@media (max-width: 1024px) {
+  .section,
+  #about,
+  #leadership {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+  section h2.gradient-text {
+    font-size: 2rem;
+  }
+}
+
+/* Mobile (<= 640px) */
+@media (max-width: 640px) {
+  .section,
+  #about,
+  #leadership {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  section h2.gradient-text {
+    font-size: 1.7rem;
+    margin-bottom: 2rem !important;
+  }
+  /* tighter section side padding so content uses the screen well */
+  #experience .max-w-4xl,
+  #leadership .max-w-4xl,
+  #skills .max-w-4xl,
+  #contact .max-w-2xl,
+  #about .max-w-7xl,
+  #projects .max-w-7xl,
+  #achievements .max-w-7xl {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  /* hero: reduce big spacing & keep it tidy */
+  #home {
+    padding-top: 1rem;
+  }
+  /* stat boxes shrink to fit two-up cleanly */
+  #home .min-w-\[110px\] {
+    min-width: 0;
+    flex: 1 1 42%;
+  }
+  /* per-section glow blobs smaller on phones */
+  #experience::before, #experience::after,
+  #leadership::before,
+  #about::before, #about::after,
+  #projects::before,
+  #achievements::before, #achievements::after,
+  #skills::before,
+  #contact::before, #contact::after {
+    width: 220px;
+    height: 220px;
+    filter: blur(70px);
+  }
+}
+
+/* Very small phones (<= 380px) */
+@media (max-width: 380px) {
+  section h2.gradient-text {
+    font-size: 1.5rem;
+  }
+  .gradient-name,
+  #home h1 {
+    font-size: 2rem;
+  }
+}
+
+/* ============================================================
+   Per-section decorative graphics (distinct glow per section)
+   ============================================================ */
+#experience,
+#leadership,
+#about,
+#projects,
+#achievements,
+#skills,
+#contact {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+#experience > *,
+#leadership > *,
+#about > *,
+#projects > *,
+#achievements > *,
+#skills > *,
+#contact > * {
+  position: relative;
+  z-index: 1;
+}
+/* shared blob base */
+#experience::before,
+#leadership::before,
+#about::before,
+#projects::before,
+#achievements::before,
+#skills::before,
+#contact::before,
+#experience::after,
+#about::after,
+#achievements::after,
+#contact::after {
+  content: "";
+  position: absolute;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.22;
+  z-index: 0;
+  pointer-events: none;
+}
+/* distinct position + colour per section */
+#experience::before { top: -60px; right: -60px; background: #8b5cf6; }
+#experience::after  { bottom: -80px; left: -60px; background: #ec4899; opacity: 0.14; }
+
+#leadership::before { top: 40px; left: -90px; background: #d946ef; }
+
+#about::before { top: -70px; left: -50px; background: #6366f1; }
+#about::after  { bottom: -90px; right: -60px; background: #a855f7; opacity: 0.16; }
+
+#projects::before { top: -80px; right: -40px; background: #a855f7; }
+
+#achievements::before { top: 20px; right: -90px; background: #6366f1; }
+#achievements::after  { bottom: -80px; left: -70px; background: #d946ef; opacity: 0.16; }
+
+#skills::before { top: -60px; left: -40px; background: #ec4899; }
+
+#contact::before { top: -50px; right: -50px; background: #8b5cf6; }
+#contact::after  { bottom: -70px; left: -50px; background: #6366f1; opacity: 0.16; }
+
+/* ============================================================
+   MIDNIGHT PURPLE — base theme (overrides blue-black slate)
+   ============================================================ */
+body {
+  background-color: #0e0720 !important;
+  background-image:
+    radial-gradient(900px circle at 8% 4%, rgba(139, 92, 246, 0.14), transparent 42%),
+    radial-gradient(1000px circle at 92% 14%, rgba(217, 70, 239, 0.10), transparent 45%),
+    radial-gradient(1200px circle at 50% 108%, rgba(99, 102, 241, 0.13), transparent 55%) !important;
+  background-attachment: fixed !important;
+}
+#about {
+  background:
+    radial-gradient(circle at 15% 18%, rgba(168, 85, 247, 0.10), transparent 45%),
+    radial-gradient(circle at 85% 88%, rgba(99, 102, 241, 0.10), transparent 45%),
+    #0e0720 !important;
+}
+/* Experience — same midnight-purple base as the rest of the page */
+#experience {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.10), transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(99, 102, 241, 0.10), transparent 45%),
+    #0e0720 !important;
+}
+/* Experience cards — distinct colour + left accent */
+#experience .bg-slate-800 {
+  background: linear-gradient(160deg, #3b1d6e, #1e1145) !important;
+  border-left: 5px solid #c084fc !important;
+}
+#experience .bg-slate-800:hover {
+  border-left-color: #e879f9 !important;
+  box-shadow: 0 0 36px rgba(192, 132, 252, 0.25), 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+/* Achievement cards — distinct colour + left accent */
+#achievements .bg-slate-800 {
+  background: linear-gradient(145deg, #7e3ab0, #4c2480) !important;
+  border-left: 5px solid #f0abfc !important;
+}
+#achievements .bg-slate-800:hover {
+  border-left-color: #f0abfc !important;
+  box-shadow: 0 0 36px rgba(232, 121, 249, 0.25), 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+/* Achievement cards — light (day) mode: white glass + purple accent
+   (needed because the dark rule uses the `background` shorthand, so the
+   gradient image survives the generic light-mode background-color override) */
+html.light-mode #achievements .bg-slate-800 {
+  background: rgba(255, 255, 255, 0.78) !important;
+  border-left: 5px solid #a855f7 !important;
+}
+html.light-mode #achievements .bg-slate-800:hover {
+  border-left-color: #7e22ce !important;
+  box-shadow: 0 0 32px rgba(147, 51, 234, 0.15), 0 10px 30px rgba(15, 23, 42, 0.12) !important;
+}
+/* Experience section + cards — light (day) mode overrides.
+   The dark rules (#experience, #experience .bg-slate-800) use the `background`
+   shorthand with ID specificity + !important, so the generic light-mode override
+   can't reach them (same reason as #achievements above). */
+html.light-mode #experience {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.10), transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(236, 72, 153, 0.08), transparent 45%),
+    #eef2f7 !important;
+}
+html.light-mode #experience .bg-slate-800 {
+  background: rgba(255, 255, 255, 0.78) !important;
+  border-left: 5px solid #a855f7 !important;
+}
+html.light-mode #experience .bg-slate-800:hover {
+  border-left-color: #7e22ce !important;
+  box-shadow: 0 0 32px rgba(147, 51, 234, 0.15), 0 10px 30px rgba(15, 23, 42, 0.12) !important;
+}
+header nav {
+  background: rgba(36, 21, 64, 0.6) !important;
+}
+#menu {
+  background: rgba(30, 18, 56, 0.88) !important;
+}
+.memories {
+  background:
+    radial-gradient(circle at 15% 18%, rgba(168, 85, 247, 0.10), transparent 45%),
+    radial-gradient(circle at 85% 88%, rgba(99, 102, 241, 0.10), transparent 45%),
+    #0e0720 !important;
+}
+footer.bg-slate-800 {
+  background-color: #1a1030 !important;
+}
+#contact input,
+#contact textarea {
+  background-color: #20143f !important;
+  border-color: #3b2a63 !important;
+}
+
+/* ============================================================
+   DAY / NIGHT  —  LIGHT MODE OVERRIDES (html.light-mode)
+   ============================================================ */
+html.light-mode body {
+  background-color: #eef2f7 !important;
+  color: #1e293b;
+  background-image:
+    radial-gradient(600px circle at 0% 0%, rgba(147, 51, 234, 0.10), transparent 45%),
+    radial-gradient(700px circle at 100% 20%, rgba(139, 92, 246, 0.10), transparent 45%),
+    radial-gradient(700px circle at 50% 100%, rgba(168, 85, 247, 0.08), transparent 45%);
+}
+
+/* Section backgrounds */
+html.light-mode section#home {
+  background: linear-gradient(135deg, #e0f2fe, #eef2ff, #f8fafc) !important;
+}
+html.light-mode #about {
+  background: #eef2f7 !important;
+}
+html.light-mode .memories {
+  background: linear-gradient(135deg, #e2e8f0, #f1f5f9) !important;
+  color: #1e293b;
+}
+html.light-mode .hero-grid { opacity: 0.5; }
+
+/* Navbar + mobile menu */
+html.light-mode header nav,
+html.light-mode #menu {
+  background: rgba(255, 255, 255, 0.7) !important;
+  border-color: rgba(15, 23, 42, 0.08) !important;
+}
+html.light-mode .nav-link { color: #334155; }
+html.light-mode .nav-link:hover { color: #7e22ce; }
+
+/* Cards -> white glass */
+html.light-mode section .bg-slate-800:not(input):not(textarea) {
+  background-color: rgba(255, 255, 255, 0.78) !important;
+  border-color: rgba(15, 23, 42, 0.08);
+  box-shadow: 0 8px 28px rgba(15, 23, 42, 0.08);
+}
+html.light-mode section .bg-slate-800:not(input):not(textarea):hover {
+  border-color: rgba(126, 34, 206, 0.45);
+  box-shadow: 0 0 32px rgba(147, 51, 234, 0.15), 0 10px 30px rgba(15, 23, 42, 0.12);
+}
+html.light-mode footer.bg-slate-800 {
+  background-color: #e2e8f0 !important;
+}
+
+/* Translucent utility surfaces */
+html.light-mode .bg-white\/5 { background-color: rgba(15, 23, 42, 0.04) !important; }
+html.light-mode .border-white\/10 { border-color: rgba(15, 23, 42, 0.1) !important; }
+
+/* Text colour swaps */
+html.light-mode .text-white,
+html.light-mode strong.text-white { color: #0f172a !important; }
+html.light-mode .text-gray-100,
+html.light-mode .text-gray-200,
+html.light-mode .text-gray-300,
+html.light-mode .text-gray-400,
+html.light-mode .text-slate-300,
+html.light-mode .text-slate-400,
+html.light-mode .text-slate-500 { color: #475569 !important; }
+html.light-mode .text-purple-400,
+html.light-mode .text-purple-300 { color: #7e22ce !important; }
+
+/* Form fields stay solid white */
+html.light-mode #contact input,
+html.light-mode #contact textarea {
+  background-color: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a;
+}
+
+/* Timeline line */
+html.light-mode #experience .bg-slate-700 { background-color: #cbd5e1 !important; }
+
+/* Timeline dots — dark ring reads as a grey blob on the light page,
+   so match the ring to the page background so the purple dot punches through */
+html.light-mode #experience .ring-slate-900 {
+  --tw-ring-color: #eef2f7 !important;
+}
+
+/* Project cards — richer gradient background + left accent */
+#projects .project-card {
+    background: linear-gradient(160deg, #2e1065, #1e1b4b) !important;
+    border-left: 4px solid #a855f7 !important;
+}
+#projects .project-card {
+    position: relative;
+}
+#projects .project-card:hover {
+    border-left-color: #c084fc !important;
+    box-shadow: 0 0 40px rgba(168, 85, 247, 0.22), 0 12px 36px rgba(0, 0, 0, 0.4);
+    animation: none;
+}
+
+/* Shine sweep on hover */
+#projects .project-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 55%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.7s ease;
+    pointer-events: none;
+    z-index: 3;
+}
+#projects .project-card:hover::before {
+    left: 130%;
+}
+
+/* Project card image zoom (works even without the group class) */
+#projects .project-card img {
+    transition: transform 0.6s ease;
+}
+#projects .project-card:hover img {
+    transform: scale(1.08);
+}
+
+/* Tags pop up slightly on hover */
+#projects .project-card:hover .rounded-full {
+    transform: translateY(-2px);
+}
+
+/* Continuous soft glow pulse on the left accent */
+#projects .project-card {
+    animation: cardEdgeGlow 4s ease-in-out infinite;
+}
+@keyframes cardEdgeGlow {
+    0%, 100% { box-shadow: -3px 0 12px -4px rgba(168, 85, 247, 0.4); }
+    50% { box-shadow: -3px 0 18px -2px rgba(168, 85, 247, 0.75); }
+}
+html.light-mode #projects .project-card {
+    background: linear-gradient(160deg, #ffffff, #eef2f7) !important;
+}

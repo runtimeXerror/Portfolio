@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" font-family="Inter, Arial, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2e1065"/>
+      <stop offset="1" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="400" fill="url(#bg)"/>
+  <!-- app window -->
+  <rect x="120" y="70" width="360" height="260" rx="18" fill="#1e293b" stroke="#a855f7" stroke-opacity="0.3"/>
+  <!-- header -->
+  <rect x="120" y="70" width="360" height="48" rx="18" fill="#a855f7" opacity="0.18"/>
+  <text x="148" y="100" font-size="20" font-weight="700" fill="#ffffff">Attendance</text>
+  <text x="430" y="100" font-size="16" font-weight="600" fill="#86efac">92%</text>
+  <!-- rows -->
+  <g>
+    <circle cx="160" cy="150" r="12" fill="#a855f7"/>
+    <rect x="184" y="143" width="180" height="14" rx="7" fill="#475569"/>
+    <circle cx="450" cy="150" r="13" fill="#22c55e"/>
+    <path d="M444 150 l4 4 l8 -8" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+  <g>
+    <circle cx="160" cy="192" r="12" fill="#6366f1"/>
+    <rect x="184" y="185" width="150" height="14" rx="7" fill="#475569"/>
+    <circle cx="450" cy="192" r="13" fill="#22c55e"/>
+    <path d="M444 192 l4 4 l8 -8" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+  <g>
+    <circle cx="160" cy="234" r="12" fill="#ec4899"/>
+    <rect x="184" y="227" width="170" height="14" rx="7" fill="#475569"/>
+    <circle cx="450" cy="234" r="13" fill="#ef4444"/>
+    <path d="M445 229 l10 10 M455 229 l-10 10" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <g>
+    <circle cx="160" cy="276" r="12" fill="#a855f7"/>
+    <rect x="184" y="269" width="140" height="14" rx="7" fill="#475569"/>
+    <circle cx="450" cy="276" r="13" fill="#22c55e"/>
+    <path d="M444 276 l4 4 l8 -8" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>

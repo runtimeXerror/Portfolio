@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vishal - Portfolio</title>
+    <!-- favicon -->
+    <link rel="icon" href="dp_2.jpg" type="image/x-icon">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- AOS Animation Library CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body class="bg-slate-900 text-gray-100 overflow-x-hidden">
+    <!-- Navbar Section -->
+    <header class="fixed top-0 left-0 right-0 z-[1000] px-3 sm:px-4 pt-3 sm:pt-4">
+        <nav
+            class="mx-auto max-w-7xl bg-slate-900/60 backdrop-blur-xl border border-white/10 shadow-xl shadow-black/30 rounded-2xl px-4 sm:px-6 py-3 flex items-center justify-between">
+            <!-- Left Logo/Title -->
+            <a href="#home" class="flex items-center gap-2.5 group shrink-0">
+                <span
+                    class="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-purple-500 to-violet-600 text-white font-extrabold text-lg shadow-md shadow-purple-500/40 group-hover:scale-110 group-hover:rotate-3 transition">
+                    V
+                </span>
+                <span
+                    class="text-lg sm:text-xl font-extrabold leading-none bg-gradient-to-r from-purple-300 to-violet-400 bg-clip-text text-transparent">
+                    Vishal<span class="hidden sm:inline">&nbsp;Kumar</span>
+                </span>
+            </a>
+
+            <!-- Right side -->
+            <div class="flex items-center gap-3">
+                <!-- Navigation Links -->
+                <ul class="hidden lg:flex items-center gap-7 text-sm text-gray-300 font-medium">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#experience" class="nav-link">Experience</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#achievements" class="nav-link">Achievements</a></li>
+                    <li><a href="#skills" class="nav-link">Skills</a></li>
+                    <li><a href="#contact"
+                            class="ml-1 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500 to-violet-600 text-white font-semibold shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50 hover:scale-105 transition">Let's
+                            Talk</a></li>
+                </ul>
+
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" aria-label="Toggle theme"
+                    class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-purple-300 hover:bg-purple-500 hover:text-white transition shrink-0">
+                    <i data-lucide="moon" class="w-5 h-5 theme-icon-dark"></i>
+                    <i data-lucide="sun" class="w-5 h-5 theme-icon-light hidden"></i>
+                </button>
+
+                <!-- Mobile Hamburger -->
+                <div class="lg:hidden shrink-0">
+                    <button id="menu-btn" class="flex flex-col space-y-1.5 focus:outline-none p-1">
+                        <span class="w-6 h-0.5 bg-purple-400 transition"></span>
+                        <span class="w-6 h-0.5 bg-purple-400 transition"></span>
+                        <span class="w-6 h-0.5 bg-purple-400 transition"></span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <div id="menu"
+            class="hidden mx-auto max-w-7xl bg-slate-900/80 backdrop-blur-xl border border-white/10 shadow-xl rounded-2xl mt-2 p-6 lg:hidden">
+            <ul class="flex flex-col space-y-3 text-gray-300 font-medium">
+                <li><a href="#home" class="nav-link inline-block">Home</a></li>
+                <li><a href="#experience" class="nav-link inline-block">Experience & Leadership</a></li>
+                <li><a href="#about" class="nav-link inline-block">About Me</a></li>
+                <li><a href="#projects" class="nav-link inline-block">My Projects</a></li>
+                <li><a href="#achievements" class="nav-link inline-block">Achievements</a></li>
+                <li><a href="#skills" class="nav-link inline-block">My Skills</a></li>
+                <li class="pt-2"><a href="#contact"
+                        class="inline-block px-5 py-2.5 rounded-full bg-gradient-to-r from-purple-500 to-violet-600 text-white font-semibold shadow-lg shadow-purple-500/30">Let's
+                        Talk</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <script>
+        // Hamburger Toggle
+        const btn = document.getElementById("menu-btn");
+        const menu = document.getElementById("menu");
+
+        btn.addEventListener("click", () => {
+            menu.classList.toggle("hidden");
+
+            // Animate hamburger
+            btn.classList.toggle("open");
+        });
+
+        // Day / Night theme toggle
+        (function () {
+            const root = document.documentElement;
+
+            function apply(theme) {
+                // Re-query each time (lucide swaps <i> for <svg> on load)
+                const moon = document.querySelector(".theme-icon-dark");
+                const sun = document.querySelector(".theme-icon-light");
+                if (theme === "light") {
+                    root.classList.add("light-mode");
+                    if (moon) moon.classList.add("hidden");
+                    if (sun) sun.classList.remove("hidden");
+                } else {
+                    root.classList.remove("light-mode");
+                    if (sun) sun.classList.add("hidden");
+                    if (moon) moon.classList.remove("hidden");
+                }
+            }
+
+            apply(localStorage.getItem("theme") || "dark");
+
+            const toggle = document.getElementById("theme-toggle");
+            if (toggle) {
+                toggle.addEventListener("click", () => {
+                    const next = root.classList.contains("light-mode") ? "dark" : "light";
+                    localStorage.setItem("theme", next);
+                    apply(next);
+                });
+            }
+        })();
+    </script>
+
+    <style>
+        /* Hamburger Animation */
+        #menu-btn.open span:nth-child(1) {
+            transform: rotate(45deg) translateY(8px);
+        }
+
+        #menu-btn.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        #menu-btn.open span:nth-child(3) {
+            transform: rotate(-45deg) translateY(-8px);
+        }
+
+        #menu-btn span {
+            transition: all 0.3s ease;
+        }
+
+        /* Animated underline nav links */
+        .nav-link {
+            position: relative;
+            transition: color 0.25s ease;
+        }
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            height: 2px;
+            width: 0;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #a855f7, #8b5cf6);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover {
+            color: #a855f7;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+
+
+
+
+
+    <section id="home"
+        class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1a0f2e] via-[#140a26] to-[#0a0614] overflow-hidden">
+        <!-- Animated Background (Aurora + grid + blobs) -->
+        <div class="absolute inset-0">
+            <div class="aurora"></div>
+            <div class="hero-grid"></div>
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+        </div>
+
+        <!-- Content -->
+        <div
+            class="relative z-10 w-full max-w-7xl mx-auto px-6 pt-28 pb-16 flex flex-col-reverse lg:flex-row items-center lg:justify-between gap-10 lg:gap-12">
+
+            <!-- LEFT: Text / Data -->
+            <div class="flex-1 text-center lg:text-left">
+                <!-- Availability badge -->
+                <div class="flex justify-center lg:justify-start mb-6 animate-fadein">
+                    <span
+                        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-400/30 text-purple-300 text-xs sm:text-sm font-medium backdrop-blur">
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-400"></span>
+                        </span>
+                        Open to new opportunities
+                    </span>
+                </div>
+
+                <!-- Heading -->
+                <h1
+                    class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-4 animate-fadein tracking-tight">
+                    Hi, I'm <span class="gradient-name">Vishal Kumar</span>
+                </h1>
+
+                <!-- Role -->
+                <p class="text-lg sm:text-xl md:text-2xl text-gray-300 mb-3 animate-fadeup font-medium">
+                    <span class="gradient-text font-semibold">Full-Stack Developer</span> &amp; AI Builder
+                </p>
+                <p class="max-w-xl mx-auto lg:mx-0 text-sm sm:text-base text-gray-400 mb-7 animate-fadeup">
+                    Building <span class="text-purple-400 font-semibold">LaunchifyX</span> — turning ideas into scalable,
+                    AI-powered web products.
+                </p>
+
+                <!-- Buttons -->
+                <div class="flex flex-wrap justify-center lg:justify-start gap-4 mb-8">
+                    <a href="#projects"
+                        class="px-7 py-3 bg-purple-500 hover:bg-purple-400 text-slate-950 font-semibold rounded-full shadow-lg shadow-purple-500/30 transition transform hover:scale-105 hover:-translate-y-0.5">
+                        View Projects
+                    </a>
+                    <a href="#contact"
+                        class="px-7 py-3 border border-purple-400/60 text-purple-300 hover:bg-purple-500 hover:text-slate-950 font-semibold rounded-full shadow-md transition transform hover:scale-105 hover:-translate-y-0.5">
+                        Get in Touch
+                    </a>
+                </div>
+
+                <!-- Stats strip -->
+                <div class="mt-10 flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4 animate-fadeup">
+                    <div
+                        class="px-5 py-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur min-w-[110px] hover:border-purple-400/40 hover:bg-white/10 transition">
+                        <div class="text-2xl font-extrabold gradient-text">5+</div>
+                        <div class="text-xs text-gray-400 mt-0.5">Projects Built</div>
+                    </div>
+                    <div
+                        class="px-5 py-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur min-w-[110px] hover:border-purple-400/40 hover:bg-white/10 transition">
+                        <div class="text-2xl font-extrabold gradient-text">Top&nbsp;15</div>
+                        <div class="text-xs text-gray-400 mt-0.5">Cyber Hackathon</div>
+                    </div>
+                    <div
+                        class="px-5 py-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur min-w-[110px] hover:border-purple-400/40 hover:bg-white/10 transition">
+                        <div class="text-2xl font-extrabold gradient-text">5★</div>
+                        <div class="text-xs text-gray-400 mt-0.5">HackerRank</div>
+                    </div>
+                    <div
+                        class="px-5 py-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur min-w-[110px] hover:border-purple-400/40 hover:bg-white/10 transition">
+                        <div class="text-2xl font-extrabold gradient-text">1000+</div>
+                        <div class="text-xs text-gray-400 mt-0.5">Users Served</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: Profile Image -->
+            <div class="shrink-0 flex flex-col items-center">
+                <div class="relative">
+                    <div
+                        class="absolute -inset-3 rounded-3xl bg-gradient-to-tr from-purple-400 to-violet-500 blur-2xl opacity-50">
+                    </div>
+                    <img src="dp_2.jpg" alt="Vishal Kumar"
+                        class="relative w-48 h-48 sm:w-60 sm:h-60 lg:w-80 lg:h-80 rounded-3xl border-4 border-purple-400 shadow-2xl object-cover">
+                </div>
+                <!-- Identity -->
+                <div class="text-center mt-5">
+                    <p class="text-sm text-purple-400 font-medium">Founder @ <a href="https://launchifyx.vercel.app/"
+                            target="_blank" rel="noopener"
+                            class="underline decoration-purple-400/50 hover:decoration-purple-300 hover:text-purple-300 transition">LaunchifyX</a>
+                    </p>
+                    <p class="text-xs text-slate-400 italic mt-1">Build Fast. Launch Faster.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <a href="#experience" class="absolute bottom-6 w-full flex justify-center" aria-label="Scroll down">
+            <div class="w-6 h-10 border-2 border-purple-400/70 rounded-full flex items-start justify-center p-1">
+                <div class="w-2 h-2 bg-purple-400 rounded-full animate-bounce"></div>
+            </div>
+        </a>
+    </section>
+
+    <!-- Extra CSS -->
+    <style>
+        /* Aurora Background */
+        .aurora {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.15), transparent 60%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.15), transparent 60%),
+                radial-gradient(circle at 40% 80%, rgba(0, 255, 128, 0.15), transparent 60%);
+            animation: auroraMove 8s infinite alternate;
+        }
+
+        @keyframes auroraMove {
+            0% {
+                background-position: 20% 30%, 80% 70%, 40% 80%;
+            }
+
+            100% {
+                background-position: 30% 40%, 70% 60%, 50% 90%;
+            }
+        }
+
+        /* Glow effect for profile */
+        .animate-glow {
+            animation: glowPulse 3s infinite ease-in-out;
+        }
+
+        @keyframes glowPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(168, 85, 247, 0.9);
+            }
+        }
+
+        /* Text Animations */
+        .animate-fadein {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .animate-fadeup {
+            animation: fadeUp 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Subtle moving grid */
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(to right, rgba(168, 85, 247, 0.07) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(168, 85, 247, 0.07) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+            animation: gridShift 20s linear infinite;
+        }
+
+        @keyframes gridShift {
+            from { background-position: 0 0, 0 0; }
+            to { background-position: 48px 48px, 48px 48px; }
+        }
+
+        /* Floating colour blobs */
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.35;
+            animation: blobFloat 14s ease-in-out infinite;
+        }
+        .blob-1 {
+            width: 380px;
+            height: 380px;
+            background: #06b6d4;
+            top: -80px;
+            left: -60px;
+        }
+        .blob-2 {
+            width: 420px;
+            height: 420px;
+            background: #8b5cf6;
+            bottom: -120px;
+            right: -80px;
+            animation-delay: -7s;
+        }
+
+        @keyframes blobFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -40px) scale(1.12); }
+        }
+
+        /* Animated gradient name */
+        .gradient-name {
+            background: linear-gradient(90deg, #a855f7, #8b5cf6, #a855f7, #a855f7);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            animation: nameShine 6s linear infinite;
+        }
+
+        @keyframes nameShine {
+            to { background-position: 300% 0; }
+        }
+    </style>
+
+
+
+
+
+
+    <!-- Experience Section -->
+    <section id="experience" class="section py-20">
+        <h2 class="text-4xl font-bold text-center mb-12 gradient-text" data-aos="fade-down">Experience</h2>
+
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="relative">
+                <!-- Vertical line -->
+                <div
+                    class="absolute left-[7px] top-1 bottom-1 w-0.5 bg-gradient-to-b from-purple-400 via-purple-400/40 to-transparent">
+                </div>
+
+                <div class="space-y-10">
+
+                    <!-- Founder - LaunchifyX -->
+                    <div class="relative pl-10" data-aos="fade-up" data-aos-delay="50">
+                        <span
+                            class="absolute left-0 top-1.5 w-4 h-4 rounded-full bg-purple-400 ring-4 ring-slate-900"></span>
+                        <div class="bg-slate-800 p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-bold text-purple-400">Founder</h3>
+                        <p class="text-slate-400 text-sm mb-2">LaunchifyX • Sep 2025 – Present</p>
+                        <ul class="list-disc list-inside text-slate-300 text-sm text-justify space-y-1.5">
+                            <li>Founded <span class="font-semibold">"Let's Launch Branding &amp; Development"</span>, a
+                                digital agency serving startups and growing businesses.</li>
+                            <li>Deliver <span class="text-purple-400">App</span>, <span class="text-purple-400">Web</span> and
+                                <span class="text-purple-400">E-commerce</span> development tailored to each client's needs.</li>
+                            <li>Build a strong digital presence through branding, modern UI/UX, and scalable web
+                                technologies.</li>
+                            <li>Manage the full product lifecycle — from design and development to deployment and
+                                support.</li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                    <!-- GDG Patna -->
+                    <div class="relative pl-10" data-aos="fade-up" data-aos-delay="200">
+                        <span
+                            class="absolute left-0 top-1.5 w-4 h-4 rounded-full bg-purple-400 ring-4 ring-slate-900"></span>
+                        <div class="bg-slate-800 p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-bold text-purple-400">Frontend Developer</h3>
+                        <p class="text-slate-400 text-sm mb-2">GDG Patna • Jun 2024 – Present</p>
+                        <ul class="list-disc list-inside text-slate-300 text-sm text-justify space-y-1.5">
+                            <li>Built the official DevFest event website twice — for the 2024 and 2025 editions — using
+                                <span class="text-purple-400">React.js</span>.</li>
+                            <li>Co-led DevFest '24 &amp; '25, managing 1,000+ attendees and coordinating logistics at Urja
+                                Auditorium.</li>
+                            <li>Developed responsive, animated user interfaces ensuring a smooth experience across all
+                                devices.</li>
+                            <li>Collaborated with a cross-functional team using agile, Git-based version-controlled
+                                workflows.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                    <!-- CDAC Internship -->
+                    <div class="relative pl-10" data-aos="fade-up" data-aos-delay="100">
+                        <span
+                            class="absolute left-0 top-1.5 w-4 h-4 rounded-full bg-purple-400 ring-4 ring-slate-900"></span>
+                        <div class="bg-slate-800 p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-bold text-purple-400">AI & Data Science Intern</h3>
+                        <p class="text-slate-400 text-sm mb-2">C-DAC Patna • Jun 2025 – Jul 2025</p>
+                        <ul class="list-disc list-inside text-slate-300 text-sm text-justify space-y-1.5">
+                            <li>Built an AI-powered diagnostic platform using <span class="text-purple-400">PyTorch</span> to
+                                analyze MRI and CT scan imaging.</li>
+                            <li>Achieved <span class="font-semibold">92%+ accuracy</span> across four disorders using <span
+                                    class="text-purple-400">OpenCV</span> preprocessing and augmentation.</li>
+                            <li>Developed a real-time <span class="text-purple-400">Gradio</span> interface with prediction
+                                visualization and diagnostic workflow.</li>
+                            <li>Deployed on <span class="text-purple-400">Hugging Face Spaces</span> and presented the live
+                                tool to C-DAC mentors.</li>
+                        </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Leadership & Mentorship Section (Added just after Experience) -->
+    <section id="leadership" class="section py-20">
+        <h2 class="text-4xl font-bold text-center mb-12 gradient-text" data-aos="fade-down">Leadership & Positions of
+            Responsibility</h2>
+        <div class="max-w-4xl mx-auto px-6 space-y-8">
+            <div class="bg-slate-800 rounded-lg shadow-lg p-6" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="text-xl font-bold text-purple-400 mb-2">Event Coordinator – GDG Patna</h3>
+                <p class="text-slate-300">Co-led DevFest '24 & '25, managing 1,000+ attendees and logistics at Urja
+                    Auditorium. Built the official event website in React.js for information flow and ticket
+                    management.</p>
+            </div>
+            <div class="bg-slate-800 rounded-lg shadow-lg p-6" data-aos="fade-up" data-aos-delay="200">
+                <h3 class="text-xl font-bold text-purple-400 mb-2">Volunteer – Google I/O Extended 2024</h3>
+                <p class="text-slate-300">Coordinated the event and managed 200+ attendees at NIT Patna, supporting
+                    technical setup and ensuring smooth execution of sessions and on-ground operations.</p>
+            </div>
+            <div class="bg-slate-800 rounded-lg shadow-lg p-6" data-aos="fade-up" data-aos-delay="300">
+                <h3 class="text-xl font-bold text-purple-400 mb-2">Workshop Organizer – Web Development</h3>
+                <p class="text-slate-300">Conducted a hands-on workshop for 50+ students on HTML, CSS, JavaScript, and
+                    React.js fundamentals at R.R.S.D.C.E, Begusarai.</p>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- About Section -->
+    <section id="about" class="pt-28 pb-20 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <!-- Heading -->
+            <h2 class="text-4xl font-bold text-center mb-12 gradient-text" data-aos="fade-down">
+                About Me
+            </h2>
+
+            <!-- Content -->
+            <div class="flex flex-col-reverse md:flex-row md:items-center gap-5 md:gap-6">
+
+                <!-- LEFT: Data in boxes -->
+                <div class="w-full md:flex-1" data-aos="fade-right" data-aos-duration="1000">
+
+                    <!-- Stats boxes -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+                        <div class="bg-slate-800 rounded-xl p-5 text-center" data-aos="zoom-in" data-aos-delay="0">
+                            <div class="text-2xl font-extrabold gradient-text">5+</div>
+                            <div class="text-xs text-slate-400 mt-1">Projects</div>
+                        </div>
+                        <div class="bg-slate-800 rounded-xl p-5 text-center" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="text-2xl font-extrabold gradient-text">92%+</div>
+                            <div class="text-xs text-slate-400 mt-1">AI Accuracy</div>
+                        </div>
+                        <div class="bg-slate-800 rounded-xl p-5 text-center" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="text-2xl font-extrabold gradient-text">7.62</div>
+                            <div class="text-xs text-slate-400 mt-1">CGPA</div>
+                        </div>
+                        <div class="bg-slate-800 rounded-xl p-5 text-center" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="text-2xl font-extrabold gradient-text">5★</div>
+                            <div class="text-xs text-slate-400 mt-1">HackerRank</div>
+                        </div>
+                    </div>
+
+                    <!-- About point cards -->
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div class="bg-slate-800 rounded-xl p-5 flex items-start gap-3" data-aos="fade-up"
+                            data-aos-delay="100">
+                            <i data-lucide="graduation-cap" class="w-6 h-6 text-purple-400 shrink-0 mt-0.5"></i>
+                            <p class="text-sm text-slate-300"><strong class="text-white">CS Student</strong><br>B.Tech
+                                at RRSDCE Begusarai (2023–2027).</p>
+                        </div>
+                        <div class="bg-slate-800 rounded-xl p-5 flex items-start gap-3" data-aos="fade-up"
+                            data-aos-delay="150">
+                            <i data-lucide="code-2" class="w-6 h-6 text-purple-400 shrink-0 mt-0.5"></i>
+                            <p class="text-sm text-slate-300"><strong class="text-white">Full-Stack
+                                    Developer</strong><br>MERN stack, FastAPI & React Native.</p>
+                        </div>
+                        <div class="bg-slate-800 rounded-xl p-5 flex items-start gap-3" data-aos="fade-up"
+                            data-aos-delay="200">
+                            <i data-lucide="brain-circuit" class="w-6 h-6 text-purple-400 shrink-0 mt-0.5"></i>
+                            <p class="text-sm text-slate-300"><strong class="text-white">AI & ML</strong><br>Interned at
+                                C-DAC Patna building diagnostic CNNs.</p>
+                        </div>
+                        <div class="bg-slate-800 rounded-xl p-5 flex items-start gap-3" data-aos="fade-up"
+                            data-aos-delay="250">
+                            <i data-lucide="award" class="w-6 h-6 text-purple-400 shrink-0 mt-0.5"></i>
+                            <p class="text-sm text-slate-300"><strong class="text-white">Hackathon
+                                    Champion</strong><br>Top 15 Cyber Hackathon, 1st Prize District Sci-Tech.</p>
+                        </div>
+                        <div class="bg-slate-800 rounded-xl p-5 flex items-start gap-3" data-aos="fade-up"
+                            data-aos-delay="300">
+                            <i data-lucide="users" class="w-6 h-6 text-purple-400 shrink-0 mt-0.5"></i>
+                            <p class="text-sm text-slate-300"><strong class="text-white">Community
+                                    Leader</strong><br>GDG Patna team & web-dev workshop mentor.</p>
+                        </div>
+                        <div class="bg-slate-800 rounded-xl p-5 flex items-start gap-3" data-aos="fade-up"
+                            data-aos-delay="350">
+                            <i data-lucide="rocket" class="w-6 h-6 text-purple-400 shrink-0 mt-0.5"></i>
+                            <p class="text-sm text-slate-300"><strong class="text-white">Innovator</strong><br>Reimagine
+                                Hackathon & SIH 2024 participant.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Image -->
+                <div class="w-full md:w-auto shrink-0 flex justify-center" data-aos="zoom-in"
+                    data-aos-duration="1000">
+                    <img src="About.jpg" alt="About Me"
+                        class="w-44 sm:w-52 md:w-56 lg:w-64 h-auto object-cover rounded-2xl border-4 border-purple-400 shadow-2xl">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+
+    <!-- Projects Section -->
+    <section id="projects" class="section py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 gradient-text" data-aos="zoom-in-down">My Projects</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Project 1: LaunchifyX -->
+                <div class="group bg-slate-800 rounded-2xl overflow-hidden shadow-lg project-card flex flex-col"
+                    data-aos="fade-up" data-aos-delay="0">
+                    <div class="relative overflow-hidden">
+                        <img src="images/launchifyx-logo.png" alt="LaunchifyX"
+                            class="w-full h-44 object-contain bg-white p-5 transition duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-1">
+                        <h3 class="text-xl font-bold text-white leading-snug min-h-[3.5rem] mb-1">LaunchifyX</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed min-h-[2.75rem] mb-4">Branding &amp; development agency for startups.</p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="text-xs font-medium text-purple-300 bg-purple-500/10 border border-purple-400/20 px-2.5 py-1 rounded-full">Startup</span>
+                            <span class="text-xs font-medium text-purple-300 bg-purple-500/10 border border-purple-400/20 px-2.5 py-1 rounded-full">Branding</span>
+                            <span class="text-xs font-medium text-purple-300 bg-purple-500/10 border border-purple-400/20 px-2.5 py-1 rounded-full">Web Dev</span>
+                        </div>
+                        <div class="mt-auto flex items-center gap-5 text-sm font-medium">
+                            <a href="https://launchifyx.vercel.app/" target="_blank" rel="noopener"
+                                class="inline-flex items-center gap-1 text-purple-400 hover:text-purple-300 transition">
+                                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>Live</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Class Attendance Management System -->
+                <div class="group bg-slate-800 rounded-2xl overflow-hidden shadow-lg project-card flex flex-col"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="relative overflow-hidden">
+                        <img src="images/proj-attendance.svg"
+                            alt="Class Attendance Management System"
+                            class="w-full h-44 object-cover transition duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-1">
+                        <h3 class="text-xl font-bold text-white leading-snug min-h-[3.5rem] mb-1">Attendance System</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed min-h-[2.75rem] mb-4">Attendance app for 1,000+ students with RBAC.</p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="text-xs font-medium text-purple-300 bg-purple-500/10 border border-purple-400/20 px-2.5 py-1 rounded-full">React Native</span>
+                            <span class="text-xs font-medium text-purple-300 bg-purple-500/10 border border-purple-400/20 px-2.5 py-1 rounded-full">FastAPI</span>
+                            <span class="text-xs font-medium text-purple-300 bg-purple-500/10 border border-purple-400/20 px-2.5 py-1 rounded-full">Expo</span>
+                        </div>
+                        <div class="mt-auto flex items-center gap-5 text-sm font-medium">
+                            <a href="https://expo.dev/accounts/runtimexerror/projects/class-attendance/builds/b58df46e-c4d3-4121-abe0-232ae6b1739b"
+                                target="_blank" rel="noopener"
+                                class="inline-flex items-center gap-1 text-purple-400 hover:text-purple-300 transition">
+                                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>Live</a>
+                            <a href="https://github.com/runtimeXerror/class-attendance-app" target="_blank" rel="noopener"
+                                class="inline-flex items-center gap-1 text-slate-400 hover:text-white transition">
+                                <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: AI Complaint Intelligence System -->
+                <div class="group bg-slate-800 rounded-2xl overflow-hidden shadow-lg project-card flex flex-col"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div class="relative overflow-hidden">
+                        <img src="images/proj-complaint.svg"
+                            alt="AI Complaint Intelligence System"
+                            class="w-full h-44 object-cover transition duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-1">
+                        <h3 class="text-xl font-bold text-white leading-snug min-h-[3.5rem] mb-1">AI Complaint System</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed min-h-[2.75rem] mb-4">AI pipeline auto-drafting RBI-compliant bank tickets.</p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="text-xs font-medium text-purple-300 bg-purple-500/10 border border-purple-400/20 px-2.5 py-1 rounded-full">FastAPI</span>
+                            <span class="text-xs font-medium text-purple-300 bg-purple-500/10 border border-purple-400/20 px-2.5 py-1 rounded-full">Claude API</span>
+                            <span class="text-xs font-medium text-purple-300 bg-purple-500/10 border border-purple-400/20 px-2.5 py-1 rounded-full">NLP</span>
+                        </div>
+                        <div class="mt-auto flex items-center gap-5 text-sm font-medium">
+                            <a href="https://github.com/runtimeXerror/AI-Banking-Complaint-Tracker-With-Auto-Response"
+                                target="_blank" rel="noopener"
+                                class="inline-flex items-center gap-1 text-slate-400 hover:text-white transition">
+                                <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Campus Food Waste Tracker -->
+                <div class="group bg-slate-800 rounded-2xl overflow-hidden shadow-lg project-card flex flex-col"
+                    data-aos="fade-up" data-aos-delay="0">
+                    <div class="relative overflow-hidden">
+                        <img src="images/proj-foodwaste.svg"
+                            alt="AI Powered Campus Food Waste Tracker"
+                            class="w-full h-44 object-cover transition duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-1">
+                        <h3 class="text-xl font-bold text-white leading-snug min-h-[3.5rem] mb-1">Food Waste Tracker</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed min-h-[2.75rem] mb-4">AI dashboard to track &amp; reduce campus food waste.</p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="text-xs font-medium text-purple-300 bg-purple-500/10 border border-purple-400/20 px-2.5 py-1 rounded-full">React.js</span>
+                            <span class="text-xs font-medium text-purple-300 bg-purple-500/10 border border-purple-400/20 px-2.5 py-1 rounded-full">FastAPI</span>
+                            <span class="text-xs font-medium text-purple-300 bg-purple-500/10 border border-purple-400/20 px-2.5 py-1 rounded-full">PostgreSQL</span>
+                        </div>
+                        <div class="mt-auto flex items-center gap-5 text-sm font-medium">
+                            <a href="https://campus-food-waste-tracker.vercel.app/" target="_blank" rel="noopener"
+                                class="inline-flex items-center gap-1 text-purple-400 hover:text-purple-300 transition">
+                                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>Live</a>
+                            <a href="https://github.com/runtimeXerror/campus-food-waste-tracker" target="_blank"
+                                rel="noopener"
+                                class="inline-flex items-center gap-1 text-slate-400 hover:text-white transition">
+                                <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5: NeuroAI -->
+                <div class="group bg-slate-800 rounded-2xl overflow-hidden shadow-lg project-card flex flex-col"
+                    data-aos="fade-up" data-aos-delay="100">
+                    <div class="relative overflow-hidden">
+                        <img src="images/proj-neuroai.svg"
+                            alt="Neurological Disorders Detection"
+                            class="w-full h-44 object-cover transition duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-1">
+                        <h3 class="text-xl font-bold text-white leading-snug min-h-[3.5rem] mb-1">NeuroAI</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed min-h-[2.75rem] mb-4">CNN detecting brain disorders from MRI/CT (92%+ acc).</p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="text-xs font-medium text-purple-300 bg-purple-500/10 border border-purple-400/20 px-2.5 py-1 rounded-full">PyTorch</span>
+                            <span class="text-xs font-medium text-purple-300 bg-purple-500/10 border border-purple-400/20 px-2.5 py-1 rounded-full">OpenCV</span>
+                            <span class="text-xs font-medium text-purple-300 bg-purple-500/10 border border-purple-400/20 px-2.5 py-1 rounded-full">Gradio</span>
+                        </div>
+                        <div class="mt-auto flex items-center gap-5 text-sm font-medium">
+                            <a href="https://huggingface.co/spaces/curiousvishal/NeuroAI" target="_blank" rel="noopener"
+                                class="inline-flex items-center gap-1 text-purple-400 hover:text-purple-300 transition">
+                                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>Live</a>
+                            <a href="https://github.com/runtimeXerror/NeuroAI--Neurological-Disorders-Detection"
+                                target="_blank" rel="noopener"
+                                class="inline-flex items-center gap-1 text-slate-400 hover:text-white transition">
+                                <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6: FactShadow -->
+                <div class="group bg-slate-800 rounded-2xl overflow-hidden shadow-lg project-card flex flex-col"
+                    data-aos="fade-up" data-aos-delay="200">
+                    <div class="relative overflow-hidden">
+                        <img src="images/proj-factshadow.svg" alt="FactShadow"
+                            class="w-full h-44 object-cover transition duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-1">
+                        <h3 class="text-xl font-bold text-white leading-snug min-h-[3.5rem] mb-1">FactShadow</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed min-h-[2.75rem] mb-4">Chrome extension scoring fake news in real time.</p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="text-xs font-medium text-purple-300 bg-purple-500/10 border border-purple-400/20 px-2.5 py-1 rounded-full">ML</span>
+                            <span class="text-xs font-medium text-purple-300 bg-purple-500/10 border border-purple-400/20 px-2.5 py-1 rounded-full">React.js</span>
+                            <span class="text-xs font-medium text-purple-300 bg-purple-500/10 border border-purple-400/20 px-2.5 py-1 rounded-full">Extension</span>
+                        </div>
+                        <div class="mt-auto flex items-center gap-5 text-sm font-medium">
+                            <a href="https://github.com/runtimeXerror/Fake-News-Detection-System" target="_blank"
+                                rel="noopener"
+                                class="inline-flex items-center gap-1 text-slate-400 hover:text-white transition">
+                                <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>Code</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="section py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 gradient-text" data-aos="zoom-in-down">
+                Achievements
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Achievement 1 -->
+                <div class="bg-slate-800 rounded-xl shadow-lg p-6 transform transition duration-500 hover:scale-105 hover:shadow-purple-500/30"
+                    data-aos="flip-left" data-aos-duration="1000">
+                    <h3 class="text-xl font-bold mb-2 text-purple-400">5★ Coder on HackerRank</h3>
+                    <p class="text-slate-400">Skilled in problem-solving and coding challenges.</p>
+                </div>
+
+                <!-- Achievement 2 -->
+                <div class="bg-slate-800 rounded-xl shadow-lg p-6 transform transition duration-500 hover:scale-105 hover:shadow-purple-500/30"
+                    data-aos="flip-left" data-aos-duration="1000" data-aos-delay="200">
+                    <h3 class="text-xl font-bold mb-2 text-purple-400">Cyber Hackathon 2025</h3>
+                    <p class="text-slate-400">Top 15 Finalist out of 302+ teams for building FactShadow – an AI-powered
+                        Fake News Detection System.</p>
+                </div>
+
+                <!-- Achievement 3 -->
+                <div class="bg-slate-800 rounded-xl shadow-lg p-6 transform transition duration-500 hover:scale-105 hover:shadow-purple-500/30"
+                    data-aos="flip-left" data-aos-duration="1000" data-aos-delay="400">
+                    <h3 class="text-xl font-bold mb-2 text-purple-400">District Science & Tech Competition</h3>
+                    <p class="text-slate-400">1st Prize Winner, represented at the state level.</p>
+                </div>
+
+                <!-- Achievement 4 -->
+                <div class="bg-slate-800 rounded-xl shadow-lg p-6 transform transition duration-500 hover:scale-105 hover:shadow-purple-500/30"
+                    data-aos="flip-left" data-aos-duration="1000" data-aos-delay="600">
+                    <h3 class="text-xl font-bold mb-2 text-purple-400">Reimagine Hackathon 2024</h3>
+                    <p class="text-slate-400">Qualified for 1st Round, showcased innovative ideas.</p>
+                </div>
+
+                <!-- Achievement 5 -->
+                <div class="bg-slate-800 rounded-xl shadow-lg p-6 transform transition duration-500 hover:scale-105 hover:shadow-purple-500/30"
+                    data-aos="flip-left" data-aos-duration="1000" data-aos-delay="800">
+                    <h3 class="text-xl font-bold mb-2 text-purple-400">Smart India Hackathon 2024</h3>
+                    <p class="text-slate-400">Participant, contributed creative problem-solving solutions.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section py-20">
+        <h2 class="text-4xl font-bold text-center mb-12 gradient-text" data-aos="fade-down">My Skills</h2>
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="bg-slate-800 p-4 rounded-lg flex items-center gap-3" data-aos="zoom-in-up"
+                    data-aos-delay="0"><i data-lucide="braces" class="text-purple-400"></i><span>C / C++</span></div>
+                <div class="bg-slate-800 p-4 rounded-lg flex items-center gap-3" data-aos="zoom-in-up"
+                    data-aos-delay="50"><i data-lucide="file-code" class="text-purple-400"></i><span>Python</span></div>
+                <div class="bg-slate-800 p-4 rounded-lg flex items-center gap-3" data-aos="zoom-in-up"
+                    data-aos-delay="100"><i data-lucide="code" class="text-purple-400"></i><span>JavaScript
+                        (ES6+)</span></div>
+                <div class="bg-slate-800 p-4 rounded-lg flex items-center gap-3" data-aos="zoom-in-up"
+                    data-aos-delay="150"><i data-lucide="atom" class="text-purple-400"></i><span>React.js</span></div>
+                <div class="bg-slate-800 p-4 rounded-lg flex items-center gap-3" data-aos="zoom-in-up"
+                    data-aos-delay="200"><i data-lucide="triangle" class="text-purple-400"></i><span>Next.js</span></div>
+                <div class="bg-slate-800 p-4 rounded-lg flex items-center gap-3" data-aos="zoom-in-up"
+                    data-aos-delay="250"><i data-lucide="wind" class="text-purple-400"></i><span>Tailwind CSS</span></div>
+                <div class="bg-slate-800 p-4 rounded-lg flex items-center gap-3" data-aos="zoom-in-up"
+                    data-aos-delay="300"><i data-lucide="server" class="text-purple-400"></i><span>Node.js &
+                        Express</span></div>
+                <div class="bg-slate-800 p-4 rounded-lg flex items-center gap-3" data-aos="zoom-in-up"
+                    data-aos-delay="350"><i data-lucide="zap" class="text-purple-400"></i><span>FastAPI</span></div>
+                <div class="bg-slate-800 p-4 rounded-lg flex items-center gap-3" data-aos="zoom-in-up"
+                    data-aos-delay="400"><i data-lucide="webhook" class="text-purple-400"></i><span>REST APIs &
+                        JWT</span></div>
+                <div class="bg-slate-800 p-4 rounded-lg flex items-center gap-3" data-aos="zoom-in-up"
+                    data-aos-delay="450"><i data-lucide="database" class="text-purple-400"></i><span>MySQL &
+                        PostgreSQL</span></div>
+                <div class="bg-slate-800 p-4 rounded-lg flex items-center gap-3" data-aos="zoom-in-up"
+                    data-aos-delay="500"><i data-lucide="brain-circuit" class="text-purple-400"></i><span>PyTorch &
+                        TensorFlow</span></div>
+                <div class="bg-slate-800 p-4 rounded-lg flex items-center gap-3" data-aos="zoom-in-up"
+                    data-aos-delay="550"><i data-lucide="bar-chart-3" class="text-purple-400"></i><span>NumPy, Pandas &
+                        Scikit-learn</span></div>
+                <div class="bg-slate-800 p-4 rounded-lg flex items-center gap-3" data-aos="zoom-in-up"
+                    data-aos-delay="600"><i data-lucide="scan-eye" class="text-purple-400"></i><span>OpenCV</span></div>
+                <div class="bg-slate-800 p-4 rounded-lg flex items-center gap-3" data-aos="zoom-in-up"
+                    data-aos-delay="650"><i data-lucide="git-branch" class="text-purple-400"></i><span>Git &
+                        GitHub</span></div>
+                <div class="bg-slate-800 p-4 rounded-lg flex items-center gap-3" data-aos="zoom-in-up"
+                    data-aos-delay="700"><i data-lucide="bot" class="text-purple-400"></i><span>Claude API & LLM
+                        Integration</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hackathon Memories Section -->
+    <section id="hackathon-memories" class="memories">
+        <h2 class="text-4xl font-bold text-center mb-12 gradient-text" data-aos="fade-down">Memorable Moments</h2>
+
+        <!-- Gallery -->
+        <div class="gallery">
+            <div class="gallery-item"><img src="images/memory2.jpg" alt="Memory 1"></div>
+            <div class="gallery-item"><img src="images/memory11.jpg" alt="Memory 2"></div>
+            <div class="gallery-item"><img src="images/memory3.jpg" alt="Memory 3"></div>
+            <div class="gallery-item"><img src="images/memory4.jpg" alt="Memory 4"></div>
+            <div class="gallery-item"><img src="images/memory5.jpg" alt="Memory 5"></div>
+            <div class="gallery-item"><img src="images/memory10.jpg" alt="Memory 6"></div>
+            <div class="gallery-item"><img src="images/memory7.jpg" alt="Memory 7"></div>
+            <div class="gallery-item"><img src="images/memory8.jpg" alt="Memory 8"></div>
+            <div class="gallery-item"><img src="images/memory9.jpg" alt="Memory 9"></div>
+
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox hidden">
+        <span class="close">&times;</span>
+        <img class="lightbox-img" src="" alt="Expanded Memory">
+        <span class="prev">&#10094;</span>
+        <span class="next">&#10095;</span>
+    </div>
+
+    <style>
+        /* General Section */
+        .memories {
+            padding: 80px 24px;
+            text-align: center;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #fff;
+        }
+
+        .memories h2 {
+            font-size: 3rem;
+            margin-bottom: 50px;
+            font-weight: bold;
+            position: relative;
+            display: inline-block;
+        }
+
+        .memories h2::after {
+            content: "";
+            width: 80px;
+            height: 4px;
+            background: #38bdf8;
+            display: block;
+            margin: 12px auto 0;
+            border-radius: 2px;
+            animation: pulseLine 2s infinite alternate;
+        }
+
+        @keyframes pulseLine {
+            from {
+                width: 50px;
+                background: #8b5cf6;
+            }
+
+            to {
+                width: 120px;
+                background: #38bdf8;
+            }
+        }
+
+        /* ------------------------
+   OPTION 1: Masonry Layout
+------------------------- */
+        .gallery {
+            column-count: 3;
+            column-gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            display: inline-block;
+            margin-bottom: 20px;
+            width: 100%;
+            border-radius: 15px;
+            overflow: hidden;
+            transform: scale(0.9);
+            opacity: 0;
+            animation: fadeInUp 0.8s forwards;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1) rotate(2deg);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                transform: translateY(50px) scale(0.9);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* ------------------------
+   OPTION 2: Floating Layout
+------------------------- */
+        /*
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+.gallery-item {
+    width: 250px;
+    height: 200px;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    animation: float 6s ease-in-out infinite;
+}
+.gallery-item:nth-child(odd) { animation-delay: 2s; }
+.gallery-item:nth-child(even) { animation-delay: 4s; }
+@keyframes float {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(2deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+*/
+
+        /* ------------------------
+   OPTION 3: Circle / Spiral
+------------------------- */
+        /*
+.gallery {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+    border-radius: 50%;
+    animation: spin 25s linear infinite;
+}
+.gallery-item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+}
+.gallery-item img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+*/
+
+        /* ------------------------
+   Lightbox Styles
+------------------------- */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            flex-direction: column;
+        }
+
+        .lightbox.hidden {
+            display: none;
+        }
+
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 80%;
+            border-radius: 12px;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+            animation: zoomIn 0.4s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .close,
+        .prev,
+        .next {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            position: absolute;
+        }
+
+        .close {
+            top: 20px;
+            right: 30px;
+        }
+
+        .prev,
+        .next {
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 50%;
+        }
+
+        .prev {
+            left: 30px;
+        }
+
+        .next {
+            right: 30px;
+        }
+
+        .prev:hover,
+        .next:hover,
+        .close:hover {
+            color: #38bdf8;
+        }
+    </style>
+
+    <script>
+        const galleryItems = document.querySelectorAll('.gallery-item img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.querySelector('.lightbox-img');
+        const closeBtn = document.querySelector('.close');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+
+        let currentIndex = 0;
+
+        // Open Lightbox
+        galleryItems.forEach((img, index) => {
+            img.addEventListener('click', () => {
+                lightbox.classList.remove('hidden');
+                lightboxImg.src = img.src;
+                currentIndex = index;
+            });
+        });
+
+        // Close
+        closeBtn.addEventListener('click', () => lightbox.classList.add('hidden'));
+
+        // Prev / Next
+        function showImage(index) {
+            if (index < 0) index = galleryItems.length - 1;
+            if (index >= galleryItems.length) index = 0;
+            lightboxImg.src = galleryItems[index].src;
+            currentIndex = index;
+        }
+        prevBtn.addEventListener('click', () => showImage(currentIndex - 1));
+        nextBtn.addEventListener('click', () => showImage(currentIndex + 1));
+
+        // Close on overlay click
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) lightbox.classList.add('hidden');
+        });
+    </script>
+
+
+
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="section py-20">
+        <h2 class="text-4xl font-bold text-center mb-12 gradient-text" data-aos="fade-down">Get In Touch</h2>
+        
+        <div class="max-w-2xl mx-auto px-6 text-center" data-aos="fade-up">
+            <p class="text-lg text-slate-300 mb-8">
+                I'm currently open to new opportunities and collaborations. Feel free to send me a message!
+            </p>
+            <form id="contact-form" class="space-y-6">
+                <input type="text" name="name" placeholder="Your Name" required
+                    class="w-full bg-slate-800 border border-slate-700 rounded-md py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-purple-400">
+                <input type="email" name="email" placeholder="Your Email" required
+                    class="w-full bg-slate-800 border border-slate-700 rounded-md py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-purple-400">
+                <textarea name="message" rows="5" placeholder="Your Message" required
+                    class="w-full bg-slate-800 border border-slate-700 rounded-md py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-purple-400"></textarea>
+                <button type="submit" id="contact-submit"
+                    class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-8 rounded-full transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed">Send
+                    Message</button>
+                <p id="contact-status" class="text-sm mt-2 min-h-[1.25rem]"></p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Contact form -> Google Sheet -->
+    <script>
+        // 1. Create a Google Sheet, open Extensions > Apps Script, paste the code
+        //    from GOOGLE-SHEET-SETUP.md, Deploy > New deployment > Web app, and
+        //    paste the resulting /exec URL below (replace PASTE_YOUR_URL_HERE).
+        const SHEET_ENDPOINT = "PASTE_YOUR_URL_HERE";
+
+        const contactForm = document.getElementById("contact-form");
+        const contactStatus = document.getElementById("contact-status");
+        const contactSubmit = document.getElementById("contact-submit");
+
+        contactForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            if (!SHEET_ENDPOINT || SHEET_ENDPOINT === "PASTE_YOUR_URL_HERE") {
+                contactStatus.textContent = "⚠️ Form not connected yet. Add your Google Sheet URL.";
+                contactStatus.className = "text-sm mt-2 text-amber-400";
+                return;
+            }
+
+            contactSubmit.disabled = true;
+            contactStatus.textContent = "Sending…";
+            contactStatus.className = "text-sm mt-2 text-purple-300";
+
+            try {
+                await fetch(SHEET_ENDPOINT, {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        name: contactForm.name.value,
+                        email: contactForm.email.value,
+                        message: contactForm.message.value
+                    })
+                });
+                contactStatus.textContent = "✅ Thanks! Your message has been sent.";
+                contactStatus.className = "text-sm mt-2 text-green-400";
+                contactForm.reset();
+            } catch (err) {
+                contactStatus.textContent = "❌ Something went wrong. Please try again or email me directly.";
+                contactStatus.className = "text-sm mt-2 text-red-400";
+            } finally {
+                contactSubmit.disabled = false;
+            }
+        });
+    </script>
+
+
+
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 mt-20">
+        <div class="max-w-7xl mx-auto px-6 py-10 text-center text-slate-400">
+            <!-- Social media handles -->
+            <div class="flex flex-wrap justify-center gap-4 mb-6">
+                <a href="https://github.com/runtimeXerror" target="_blank" rel="noopener" aria-label="GitHub"
+                    class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#24292e] text-white shadow-lg hover:scale-110 hover:-translate-y-1 transition">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+                <a href="https://linkedin.com/in/thecuriousvishal" target="_blank" rel="noopener" aria-label="LinkedIn"
+                    class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#0A66C2] text-white shadow-lg hover:scale-110 hover:-translate-y-1 transition">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
+                <a href="https://leetcode.com/u/runtimeXerror/" target="_blank" rel="noopener" aria-label="LeetCode"
+                    class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#FFA116] text-white shadow-lg hover:scale-110 hover:-translate-y-1 transition">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5" aria-hidden="true"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/></svg></a>
+                <a href="https://instagram.com/heyvishal.exe" target="_blank" rel="noopener" aria-label="Instagram"
+                    class="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-tr from-[#feda75] via-[#d62976] to-[#4f5bd5] text-white shadow-lg hover:scale-110 hover:-translate-y-1 transition">
+                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+                <a href="mailto:vishalk.cse23@gmail.com" aria-label="Email"
+                    class="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#EA4335] text-white shadow-lg hover:scale-110 hover:-translate-y-1 transition">
+                    <i data-lucide="mail" class="w-5 h-5"></i></a>
+            </div>
+            <p class="text-sm">&copy; 2025 <span class="text-purple-400 font-semibold">Vishal Kumar</span>. All Rights
+                Reserved.</p>
+            <p class="text-xs text-slate-500 mt-1">Built with passion · Build Fast. Launch Faster.</p>
+        </div>
+    </footer>
+
+    <!-- AOS Animation Library JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
+
+
